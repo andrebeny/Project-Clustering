@@ -8,7 +8,7 @@ import latihan1Model.Document;
 
 /**
  *
- * @author umang_borad
+ * @author Vandi Setyawan
  */
 
 public class Centroid {

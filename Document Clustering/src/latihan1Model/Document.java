@@ -25,7 +25,7 @@ import org.apache.lucene.util.Version;
 
 /**
  *
- * @author admin
+ * @author jarene umang borad wkwkw
  */
 public class Document implements Comparable<Document> {
 
@@ -33,7 +33,32 @@ public class Document implements Comparable<Document> {
     private String content;
     private String realContent;
     private double CosineSimilarity;
+    private String namaDokumen;
+    private double tf_idf;
     private ArrayList<Posting> listOfClusteringPosting = new ArrayList<Posting>();
+
+    public ArrayList<Double> getUnitVector(){
+        return null;
+        //nggoleki vector space ne, sek nilai term iki piro opo mneh kui
+        //iki sek penting tapi aku yo ramudeng jugo iki ngopo
+    }
+    
+    public void add_component_to_vector(double Tf_Idf){
+        this.tf_idf = Tf_Idf;
+    }
+    
+    public void normalized_Vector(){
+        //GARAPEN YO WKWKWK
+        //aku yo ra ngerti iki opo wkkw
+    }
+    
+    public String getName() {
+        return namaDokumen;
+    }
+
+    public void SetName(String namaDokumen) {
+        this.namaDokumen = namaDokumen;
+    }
 
     public Document() {
 
