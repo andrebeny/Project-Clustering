@@ -54,5 +54,7 @@ public class DocumentClusterSimilarity implements Comparable<DocumentClusterSimi
     public int compareTo(DocumentClusterSimilarity o) {
         return Double.compare(similarity, o.getSimilarity());
     }
+    
+    
 
 }

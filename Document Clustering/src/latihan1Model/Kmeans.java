@@ -30,9 +30,9 @@ public class Kmeans {
 
     void calculate_total_words() throws IOException {
         for (int i = 0; i < pool_of_Documents.size(); i++) {
-            for (int j = 0; j < pool_of_Documents.get(i).number_of_tokens(); j++) {
+            for (int j = 0; j < pool_of_Documents.get(i).getId(); j++) {
 
-                if (!total_words.contains(pool_of_Documents.get(i).get_tokens().get(j))) {
+                if (!total_words.contains(pool_of_Documents.get(i).get_tokens.get(j))) {
                     total_words.add(pool_of_Documents.get(i).get_tokens().get(j));
                 }
 
