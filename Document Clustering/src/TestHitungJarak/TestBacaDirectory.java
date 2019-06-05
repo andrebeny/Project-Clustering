@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class TestBacaDirectory {
 
     public static void main(String[] args) {
-        File dir = new File("Berita Koran");
+        File dir = new File("C:\\Users\\User\\Documents\\NetBeansProjects\\Project-Clustering 5 Juni\\Document Clustering\\Berita Koran");
         InvertedIndex2 index = new InvertedIndex2();
         index.readDirectory(dir);
         ArrayList<Document> listDoc = index.getListOfDocument();
