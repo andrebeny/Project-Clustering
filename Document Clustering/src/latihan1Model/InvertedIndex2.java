@@ -608,11 +608,13 @@ public class InvertedIndex2 {
             // variabel i merupakan idDocument;
             File file = files[i];
             doc.readFile((i + 1), file);
+            //doc.IndonesiaStemming();
             // masukkan file isi directory ke list of document pada obye index
             this.addNewDocument(doc);
         }
         // lakukan indexing atau buat dictionary
         this.makeDictionaryWithTermNumber();
+        
     }
 
     public void listAllFiles(File folder) {
