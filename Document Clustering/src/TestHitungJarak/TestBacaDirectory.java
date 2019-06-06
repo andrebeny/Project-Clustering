@@ -60,8 +60,8 @@ public class TestBacaDirectory {
         }
         //njajal method cluster
         
-//        Kmeans cluster = new Kmeans(listDoc);
-//        cluster.createCluster(3);
+        Kmeans cluster = new Kmeans(listDoc);
+        cluster.createCluster(3);
 
     }
 }

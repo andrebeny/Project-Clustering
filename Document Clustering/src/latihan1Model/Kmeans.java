@@ -288,9 +288,5 @@ public class Kmeans {
         return count == 0;
     }
 
-    //IKI PERLU DI EDIT MENEH
-    public void createCluster(File dir) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
 }
