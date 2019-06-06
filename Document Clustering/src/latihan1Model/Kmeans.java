@@ -14,6 +14,8 @@ public class Kmeans {
     public ArrayList<Document> pool_of_Documents = new ArrayList<>();
     private final ArrayList<String> total_words = new ArrayList<>();
     private ArrayList<Centroid> centroids = new ArrayList<>();
+    
+    InvertedIndex2 ii = new InvertedIndex2();
 
     
     public Kmeans(ArrayList<Document> f) {
@@ -21,9 +23,10 @@ public class Kmeans {
     }
 
     public void createCluster(int K) throws IOException, Exception {
-
+        ii.readDirectory(new File("Berita Koran"));
         calculate_total_words();
         doc_to_vec();
+        print_TFIDF();
 
         start_K_means(pool_of_Documents, K);
 
@@ -32,7 +35,7 @@ public class Kmeans {
     void calculate_total_words() throws IOException {
         for (int i = 0; i < pool_of_Documents.size(); i++) {//banyak dokumennya
 //            for (int j = 0; j < pool_of_Documents.get(i).getId(); j++) {
-            for (int j = 0; j < pool_of_Documents.get(i).getListofTerm().length; j++) {
+            for (int j = 0; j < pool_of_Documents.get(i).getListofTerm().length; j++) {//banyak termnya
 
 //                if (!total_words.contains(pool_of_Documents.get(i).get_tokens.get(j))) {
 //                    total_words.add(pool_of_Documents.get(i).get_tokens().get(j));
@@ -54,10 +57,14 @@ public class Kmeans {
                 double TF = pool_of_Documents.get(i).countOccurences(total_words.get(j)) / pool_of_Documents.get(i).number_of_tokens();
                 Sek lawas
                  */
-                double TF = pool_of_Documents.get(i).countOccurences(total_words.get(j)) / pool_of_Documents.get(i).getListofTerm().length;
-                //CountOccurence ki opo??
-                double IDF = (double) Math.log(pool_of_Documents.size() / No_doc_with_terms(total_words.get(j)));
-                double TF_IDF = TF * IDF;
+//                double TF = pool_of_Documents.get(i).countOccurences(total_words.get(j)) / pool_of_Documents.get(i).getListofTerm().length;
+//                //CountOccurence ki opo??
+//                double IDF = (double) Math.log(pool_of_Documents.size() / No_doc_with_terms(total_words.get(j)));
+//                double TF_IDF = TF * IDF;
+//                double TF = ii.getTermFrequency(total_words.get(j), i);
+//                //CountOccurence ki opo??
+//                double IDF = ii.getInverseDocumentFrequency(total_words.get(j));
+                double TF_IDF = ii.getInverseDocumentFrequency(total_words.get(j));
                 pool_of_Documents.get(i).add_component_to_vector(TF_IDF);
                 //tak tambahke methode
             }
@@ -228,7 +235,10 @@ public class Kmeans {
     private Centroid random_data_point() {
         Random randomGenerator = new Random();
         int index = randomGenerator.nextInt(pool_of_Documents.size());
-        return new Centroid(new ArrayList<>(pool_of_Documents.get(index).getUnitVector()));
+        ArrayList<Double> d = new ArrayList<>(pool_of_Documents.get(index).getUnitVector());
+        Centroid c = new Centroid(d);
+        return c;
+//        return new Centroid(new ArrayList<>(pool_of_Documents.get(index).getUnitVector()));
     }
 
     private double Edistance(Centroid get, ArrayList<Double> unitVector) {

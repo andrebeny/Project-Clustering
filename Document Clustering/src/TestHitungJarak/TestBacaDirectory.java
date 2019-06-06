@@ -23,18 +23,20 @@ public class TestBacaDirectory {
 
     public static void main(String[] args)throws FileNotFoundException, IOException, InterruptedException, Exception {
 //        File dir = new File("C:\\Users\\User\\Documents\\NetBeansProjects\\Project-Clustering 5 Juni\\Document Clustering\\Berita Koran");
-        File dir = new File("C:\\Users\\ASUS.DESKTOP-CCOM20V\\Documents\\NetBeansProjects\\Project-Clustering 6 Juni\\Document Clustering\\Berita Koran");
+//        File dir = new File("C:\\Users\\ASUS.DESKTOP-CCOM20V\\Documents\\NetBeansProjects\\Project-Clustering 6 Juni\\Document Clustering\\Berita Koran");
+        File dir = new File("Berita Koran");
         InvertedIndex2 index = new InvertedIndex2();
 
         index.readDirectory(dir);
         ArrayList<Document> listDoc = index.getListOfDocument();
         for (int i = 0; i < listDoc.size(); i++) {
             Document doc = listDoc.get(i);
-            System.out.println("Content : " + doc.getId());
-            System.out.println(doc.getContent());
+//            System.out.println("Content : " + doc.getId());
+//            System.out.println(doc.getContent());
         }
         index.makeDictionaryWithTermNumber();
         for (int i = 0; i < listDoc.size(); i++) {
+//            listDoc.get(i).stemming();
             listDoc.get(i).stemming();
             index.makeTFIDF(i);
         }
@@ -42,7 +44,7 @@ public class TestBacaDirectory {
         for (int i = 0; i < listDoc.size(); i++) {
             ArrayList<Posting> post = index.makeTFIDF(i);
             for (int j = 0; j < post.size(); j++) {
-                System.out.println(post.get(j).toString());
+//                System.out.println(post.get(j).toString());
             }
         }
 
@@ -52,17 +54,17 @@ public class TestBacaDirectory {
                 ArrayList<Posting> post2 = index.makeTFIDF(j);
                 //double Cosine = index.getInnerProduct(post1, post2);
                 double Cosine = index.getCosineSimilarity(post1, post2);
-                System.out.println("Hasil Cosine dari doc" + i + " dan doc" + j + "= " + Cosine);
+//                System.out.println("Hasil Cosine dari doc" + i + " dan doc" + j + "= " + Cosine);
                 //hasilcosine isih ngawur wkwkw
                 //isih eneng sik lebih dari 1 karo hasile NaN
-
+                //lah yo mboh aku kui rumus seko bapake og
             }
         }
         //njajal method cluster
         
-        Kmeans cluster = new Kmeans(listDoc);
-        cluster.createCluster(3);
-
+        Kmeans cluster = new Kmeans(index.getListOfDocument());
+        cluster.createCluster(2);
+        //error mergo ono sek NaN kui
     }
 }
 

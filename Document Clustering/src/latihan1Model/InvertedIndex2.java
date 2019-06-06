@@ -515,19 +515,24 @@ public class InvertedIndex2 {
      */
     public double getCosineSimilarity(ArrayList<Posting> posting,
             ArrayList<Posting> posting1) {
-        // cari jarak antara posting dan posting 1
-        double hasilDotProduct = getInnerProduct(posting, posting1);
-        // cari panjang posting
-        double panjang_posting = getLengthOfPosting(posting);
-        // cari panjang posting1
-        double panjang_posting1 = getLengthOfPosting(posting1);
-        // hitung cosine similarity
-        double result = hasilDotProduct / Math.sqrt(panjang_posting * panjang_posting1);
-        if (result == 0) {
-            return 0;
-        } else {
-            return result;
-        }
+//        // cari jarak antara posting dan posting 1
+//        double hasilDotProduct = getInnerProduct(posting, posting1);
+//        // cari panjang posting
+//        double panjang_posting = getLengthOfPosting(posting);
+//        // cari panjang posting1
+//        double panjang_posting1 = getLengthOfPosting(posting1);
+//        // hitung cosine similarity
+//        double result = hasilDotProduct / Math.sqrt(panjang_posting * panjang_posting1);
+//        if (result <= 0) {
+//            return 0;
+//        } else {
+//            return result;
+//        }
+        double atas = getInnerProduct(posting, posting1);
+        double panjangPosting = getLengthOfPosting(posting);
+        double panjangPosting1 = getLengthOfPosting(posting1);
+        double hasil = atas / (Math.sqrt(panjangPosting * panjangPosting1));
+        return hasil;
     }
 
     /**
@@ -598,6 +603,23 @@ public class InvertedIndex2 {
 
     //read file from folder, 4 method
     public void readDirectory(File directory) {
+//        File files[] = directory.listFiles();
+//        for (int i = 0; i < files.length; i++) {
+//            // buat document baru
+//            Document doc = new Document();
+//            doc.setId(i); // set idDoc sama dengan i
+//            // baca isi file
+//            // Isi file disimpan di atribut content dari objeck document
+//            // variabel i merupakan idDocument;
+//            File file = files[i];
+//            doc.readFile((i + 1), file);
+//            //doc.IndonesiaStemming();
+//            // masukkan file isi directory ke list of document pada obye index
+//            this.addNewDocument(doc);
+//        }
+//        // lakukan indexing atau buat dictionary
+//        this.makeDictionaryWithTermNumber();
+        // baca isi directory
         File files[] = directory.listFiles();
         for (int i = 0; i < files.length; i++) {
             // buat document baru
@@ -607,14 +629,14 @@ public class InvertedIndex2 {
             // Isi file disimpan di atribut content dari objeck document
             // variabel i merupakan idDocument;
             File file = files[i];
-            doc.readFile((i + 1), file);
-            //doc.IndonesiaStemming();
+            doc.readFile(i + 1, file);
+            doc.stemming();
+            doc.SetName(file.getName());
             // masukkan file isi directory ke list of document pada obye index
             this.addNewDocument(doc);
         }
         // lakukan indexing atau buat dictionary
         this.makeDictionaryWithTermNumber();
-
     }
 
     public void listAllFiles(File folder) {
@@ -711,4 +733,18 @@ public class InvertedIndex2 {
         }
     }
 
+    //seko bapake iki mbok jajali ngko aku r mudeng
+//    public void clustering(){
+//        for (int i = 0; i < NUMBER_OF_DOCUMENT_CLUSTER; i++) {
+//            Cluster cl = new Cluster(i);
+//            cl.setCenter(listOfDocument.get(i));
+//        }
+//        for (int i = 0; i < listOfDocument.size(); i++) {
+//            Document d = listOfDocument.get(i);
+//            ArrayList<DocumentToClusterSimilarity> listSimilarity = new ArrayList<DocumentToClusterSimilarity>();
+//            for (int j = 0; j < ; j++) {
+//                
+//            }
+//        }
+//    }
 }

@@ -40,7 +40,9 @@ public class Document implements Comparable<Document> {
     private ArrayList<Posting> listOfClusteringPosting = new ArrayList<Posting>();
 
     public ArrayList<Double> getUnitVector() {
-        return null;
+        //Iki isih salah, mbok bantu benahke koyo sek tak chat ng WA
+        return getVector();
+//        return null;
         //nggoleki vector space ne, sek nilai term iki piro opo mneh kui
         //iki sek penting tapi aku yo ramudeng jugo iki ngopo
     }
@@ -51,7 +53,7 @@ public class Document implements Comparable<Document> {
 
     //iki posting pak
     //nganggo method getlengthofposting, hampir mirip
-    void normalized_Vector() {
+    public void normalized_Vector() {
         double squaredSum = 0;
         if (!docVector.isEmpty()) {
 
@@ -69,11 +71,11 @@ public class Document implements Comparable<Document> {
     }
     
 
-    ArrayList<Double> getVector() {
+    public ArrayList<Double> getVector() {
         return docVector;
     }
 
-    double countOccurences(String get) {
+    public double countOccurences(String get) {
         int count = 0;
         for (int x = 0; x < listOfClusteringPosting.size(); x++) {
             if (get.equals(listOfClusteringPosting.get(x))) {
