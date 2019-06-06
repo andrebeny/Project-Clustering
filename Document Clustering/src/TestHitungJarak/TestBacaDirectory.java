@@ -50,14 +50,18 @@ public class TestBacaDirectory {
             for (int j = i + 1; j < listDoc.size() + 1; j++) {
                 ArrayList<Posting> post1 = index.makeTFIDF(i);
                 ArrayList<Posting> post2 = index.makeTFIDF(j);
-                double Cosine = index.getInnerProduct(post1, post2);
+                //double Cosine = index.getInnerProduct(post1, post2);
+                double Cosine = index.getCosineSimilarity(post1, post2);
                 System.out.println("Hasil Cosine dari doc" + i + " dan doc" + j + "= " + Cosine);
                 //hasilcosine isih ngawur wkwkw
+                //isih eneng sik lebih dari 1 karo hasile NaN
 
             }
         }
-        Kmeans cluster = new Kmeans(listDoc);
-        cluster.createCluster(3);
+        //njajal method cluster
+        
+//        Kmeans cluster = new Kmeans(listDoc);
+//        cluster.createCluster(3);
 
     }
 }
