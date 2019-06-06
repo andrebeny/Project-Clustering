@@ -1,5 +1,6 @@
 package latihan1Model;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,6 +15,7 @@ public class Kmeans {
     private final ArrayList<String> total_words = new ArrayList<>();
     private ArrayList<Centroid> centroids = new ArrayList<>();
 
+    
     public Kmeans(ArrayList<Document> f) {
         pool_of_Documents = f;
     }
@@ -51,7 +53,7 @@ public class Kmeans {
                 /*
                 double TF = pool_of_Documents.get(i).countOccurences(total_words.get(j)) / pool_of_Documents.get(i).number_of_tokens();
                 Sek lawas
-                */
+                 */
                 double TF = pool_of_Documents.get(i).countOccurences(total_words.get(j)) / pool_of_Documents.get(i).getListofTerm().length;
                 //CountOccurence ki opo??
                 double IDF = (double) Math.log(pool_of_Documents.size() / No_doc_with_terms(total_words.get(j)));
@@ -284,6 +286,11 @@ public class Kmeans {
             }
         }
         return count == 0;
+    }
+
+    //IKI PERLU DI EDIT MENEH
+    public void createCluster(File dir) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
