@@ -20,8 +20,9 @@ import java.util.ArrayList;
 public class TestBacaDirectory {
 
     public static void main(String[] args) {
-        File dir = new File("C:\\Users\\User\\Documents\\NetBeansProjects\\Project-Clustering 5 Juni\\Document Clustering\\Berita Koran");
-        InvertedIndex2 index = new InvertedIndex2();
+//        File dir = new File("C:\\Users\\User\\Documents\\NetBeansProjects\\Project-Clustering 5 Juni\\Document Clustering\\Berita Koran");
+File dir = new File("C:\\Users\\ASUS.DESKTOP-CCOM20V\\Documents\\NetBeansProjects\\Project-Clustering 6 Juni\\Document Clustering\\Berita Koran");        
+InvertedIndex2 index = new InvertedIndex2();
         index.readDirectory(dir);
         ArrayList<Document> listDoc = index.getListOfDocument();
         for (int i = 0; i < listDoc.size(); i++) {
@@ -48,6 +49,7 @@ public class TestBacaDirectory {
                 ArrayList<Posting> post2 = index.makeTFIDF(j);
                 double Cosine = index.getInnerProduct(post1, post2);
                 System.out.println("Hasil Cosine dari doc"+i+ " dan doc"+j+"= " + Cosine);
+                //hasilcosine isih ngawur wkwkw
 
             }
         }

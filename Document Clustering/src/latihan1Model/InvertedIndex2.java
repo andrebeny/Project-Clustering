@@ -614,7 +614,7 @@ public class InvertedIndex2 {
         }
         // lakukan indexing atau buat dictionary
         this.makeDictionaryWithTermNumber();
-        
+
     }
 
     public void listAllFiles(File folder) {

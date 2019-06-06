@@ -35,23 +35,54 @@ public class Document implements Comparable<Document> {
     private double CosineSimilarity;
     private String namaDokumen;
     private double tf_idf;
+    private ArrayList<Double> docVector = new ArrayList<>();
+    private ArrayList<Double> unitVector = new ArrayList<>();
     private ArrayList<Posting> listOfClusteringPosting = new ArrayList<Posting>();
 
-    public ArrayList<Double> getUnitVector(){
+    public ArrayList<Double> getUnitVector() {
         return null;
         //nggoleki vector space ne, sek nilai term iki piro opo mneh kui
         //iki sek penting tapi aku yo ramudeng jugo iki ngopo
     }
-    
-    public void add_component_to_vector(double Tf_Idf){
+
+    public void add_component_to_vector(double Tf_Idf) {
         this.tf_idf = Tf_Idf;
     }
-    
-    public void normalized_Vector(){
-        //GARAPEN YO WKWKWK
-        //aku yo ra ngerti iki opo wkkw
+
+    //iki posting pak
+    //nganggo method getlengthofposting, hampir mirip
+    void normalized_Vector() {
+        double squaredSum = 0;
+        if (!docVector.isEmpty()) {
+
+            for (int d = 0; d < docVector.size(); d++) {
+                squaredSum += (docVector.get(d) * docVector.get(d));
+            }
+
+            squaredSum = Math.sqrt(squaredSum);
+
+            for (int d = 0; d < docVector.size(); d++) {
+                unitVector.add(d, docVector.get(d) / squaredSum);
+            }
+        }
+
     }
     
+
+    ArrayList<Double> getVector() {
+        return docVector;
+    }
+
+    double countOccurences(String get) {
+        int count = 0;
+        for (int x = 0; x < listOfClusteringPosting.size(); x++) {
+            if (get.equals(listOfClusteringPosting.get(x))) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public String getName() {
         return namaDokumen;
     }
@@ -304,5 +335,4 @@ public class Document implements Comparable<Document> {
         this.listOfClusteringPosting = listOfClusteringPosting;
     }
 
-   
 }
