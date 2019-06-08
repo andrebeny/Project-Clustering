@@ -30,8 +30,8 @@ public class InvertedIndex2 {
 
     private ArrayList<Document> listOfDocument = new ArrayList<Document>();
     private ArrayList<Term> dictionary = new ArrayList<Term>();
-    private ArrayList<Cluster> cluster = new ArrayList<Cluster>();
-    public static final int NUMBER_OF_DOCUMENT_CLUSTER = 2;
+    private ArrayList<Cluster> listOfCluster = new ArrayList<Cluster>();
+    public static final int NUMBER_OF_DOCUMENT_CLUSTER = 3;
 
     public InvertedIndex2() {
     }
@@ -603,27 +603,11 @@ public class InvertedIndex2 {
 
     //read file from folder, 4 method
     public void readDirectory(File directory) {
-//        File files[] = directory.listFiles();
-//        for (int i = 0; i < files.length; i++) {
-//            // buat document baru
-//            Document doc = new Document();
-//            doc.setId(i); // set idDoc sama dengan i
-//            // baca isi file
-//            // Isi file disimpan di atribut content dari objeck document
-//            // variabel i merupakan idDocument;
-//            File file = files[i];
-//            doc.readFile((i + 1), file);
-//            //doc.IndonesiaStemming();
-//            // masukkan file isi directory ke list of document pada obye index
-//            this.addNewDocument(doc);
-//        }
-//        // lakukan indexing atau buat dictionary
-//        this.makeDictionaryWithTermNumber();
-        // baca isi directory
+       // baca isi directory
         File files[] = directory.listFiles();
+        Document doc = new Document();
         for (int i = 0; i < files.length; i++) {
             // buat document baru
-            Document doc = new Document();
             doc.setId(i); // set idDoc sama dengan i
             // baca isi file
             // Isi file disimpan di atribut content dari objeck document
@@ -709,17 +693,17 @@ public class InvertedIndex2 {
     }
 
     /**
-     * @return the cluster
+     * @return the listOfCluster
      */
     public ArrayList<Cluster> getCluster() {
-        return cluster;
+        return listOfCluster;
     }
 
     /**
-     * @param cluster the cluster to set
+     * @param cluster the listOfCluster to set
      */
     public void setCluster(ArrayList<Cluster> cluster) {
-        this.cluster = cluster;
+        this.listOfCluster = cluster;
     }
 
     public void preClustering() {
@@ -734,17 +718,36 @@ public class InvertedIndex2 {
     }
 
     //seko bapake iki mbok jajali ngko aku r mudeng
-//    public void clustering(){
-//        for (int i = 0; i < NUMBER_OF_DOCUMENT_CLUSTER; i++) {
-//            Cluster cl = new Cluster(i);
-//            cl.setCenter(listOfDocument.get(i));
-//        }
-//        for (int i = 0; i < listOfDocument.size(); i++) {
-//            Document d = listOfDocument.get(i);
-//            ArrayList<DocumentToClusterSimilarity> listSimilarity = new ArrayList<DocumentToClusterSimilarity>();
-//            for (int j = 0; j < ; j++) {
-//                
-//            }
-//        }
-//    }
+    //bukane iki tinggal gawe main e wae to
+    public void clustering() {
+        // buat arraylistofCluster sejumlah kelompok yang sudah ditentukan
+        // dan tetapkan N document awal sebagai pusat listOfCluster
+        for (int i = 0; i < NUMBER_OF_DOCUMENT_CLUSTER; i++) {
+            Cluster cluster = new Cluster(i);
+            cluster.setCenter(listOfDocument.get(i));
+        }
+
+        // lalu lakukan penghitungan similarity antara dokumen 
+        // dengan masing-masing center
+        for (int i = 0; i < listOfDocument.size(); i++) {
+            // per epoch
+            Document doc = listOfDocument.get(i);
+            // hitung similarity
+            ArrayList<DocumentClusterSimilarity> listOfSimilarity
+                    = new ArrayList<DocumentClusterSimilarity>();
+            for (int j = 0; j < listOfCluster.size(); j++) {
+                double sim = getCosineSimilarity(listOfDocument.get(i).getListOfClusteringPosting(),
+                        listOfCluster.get(j).getCenter().getListOfClusteringPosting());
+                DocumentClusterSimilarity simDoc
+                        = new DocumentClusterSimilarity(sim, listOfCluster.get(j));
+                listOfSimilarity.add(simDoc);
+            }
+            // sorting similarity
+            Collections.sort(listOfSimilarity);
+            // asumsi sorting descending , similarity terurut dari besar ke kecil
+            // tetapkan document ke listOfCluster dengan similarity terbesar
+            // anda juga bisa tetapkan dengan KNN
+            listOfSimilarity.get(0).getCluster().getMember().add(doc);
+        }
+    }
 }

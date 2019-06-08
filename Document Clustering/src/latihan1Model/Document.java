@@ -41,7 +41,7 @@ public class Document implements Comparable<Document> {
 
     public ArrayList<Double> getUnitVector() {
         //Iki isih salah, mbok bantu benahke koyo sek tak chat ng WA
-        return getVector();
+        return unitVector;
 //        return null;
         //nggoleki vector space ne, sek nilai term iki piro opo mneh kui
         //iki sek penting tapi aku yo ramudeng jugo iki ngopo
@@ -263,9 +263,7 @@ public class Document implements Comparable<Document> {
         Analyzer analyzer = new StandardAnalyzer();
         analyzer.setVersion(matchVersion);
         // buat token
-        TokenStream tokenStream = analyzer.tokenStream(
-                "myField",
-                new StringReader(text.trim()));
+        TokenStream tokenStream = analyzer.tokenStream("myField",new StringReader(text.trim()));
         // stemming
         tokenStream = new PorterStemFilter(tokenStream);
         // buat string baru tanpa stopword
@@ -299,6 +297,7 @@ public class Document implements Comparable<Document> {
 
     public void IndonesiaStemming() {
         String text = realContent;
+        System.out.println("Text = " + text);
         Version matchVersion = Version.LUCENE_7_7_0; // Substitute desired Lucene version for XY
         Analyzer analyzer = new IndonesianAnalyzer();
         analyzer.setVersion(matchVersion);

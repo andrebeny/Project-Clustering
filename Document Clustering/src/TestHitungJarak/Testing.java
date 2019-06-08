@@ -22,7 +22,7 @@ public class Testing {
         ii.readDirectory(f);
         ii.makeDictionaryWithTermNumber();
         for (int i = 0; i < ii.getListOfDocument().size(); i++) {
-            ii.getListOfDocument().get(i).IndonesiaStemming();
+            ii.getListOfDocument().get(i);
             ii.makeTFIDF(i);
         }
         
@@ -30,5 +30,6 @@ public class Testing {
         ArrayList<Posting> xy = ii.makeTFIDF(40);
         double cs = ii.getCosineSimilarity(xx, xy);
         System.out.println(cs);
+    
     }
 }
