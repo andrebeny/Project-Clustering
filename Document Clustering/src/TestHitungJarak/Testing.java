@@ -26,10 +26,12 @@ public class Testing {
             ii.makeTFIDF(i);
         }
         
-        ArrayList<Posting> xx = ii.makeTFIDF(39);
-        ArrayList<Posting> xy = ii.makeTFIDF(40);
+        ArrayList<Posting> xx = ii.makeTFIDF(25);
+        ArrayList<Posting> xy = ii.makeTFIDF(39);
         double cs = ii.getCosineSimilarity(xx, xy);
         System.out.println(cs);
     
+        
+        
     }
 }

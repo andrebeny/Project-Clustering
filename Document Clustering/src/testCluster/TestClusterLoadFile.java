@@ -20,11 +20,7 @@ public class TestClusterLoadFile {
     public static void main(String[] args) {
         InvertedIndex2 index = new InvertedIndex2();
         Document doc = new Document();
-        //ini filemu
-        File folder = new File("C:\\Users\\ASUS.DESKTOP-CCOM20V\\Documents\\NetBeansProjects\\Project-Clustering Begin\\Document Clustering\\Berita Koran");
-        //mbuh ngopo iki soale nggonmu ng laptopmu aku ra ngerti
-        //nganggo sing ngonku iki ng ngisor iso dadine
-        
+
         //ini fileku
         File fileku = new File("Berita Koran");
 //        index.readDirectory(folder);
@@ -32,14 +28,12 @@ public class TestClusterLoadFile {
 
         index.preClustering();
         for (int i = 0; i < index.getListOfDocument().size(); i++) {
-            ArrayList<Posting> listPosting
-                    = index.getListOfDocument().get(i).getListOfClusteringPosting();
+            ArrayList<Posting> listPosting = index.getListOfDocument().get(i).getListOfClusteringPosting();
             System.out.println("IdDoc = " + index.getListOfDocument().get(i).getId());
             for (int j = 0; j < listPosting.size(); j++) {
                 System.out.println(listPosting.get(j));
             }
 
         }
-
     }
 }

@@ -603,11 +603,11 @@ public class InvertedIndex2 {
 
     //read file from folder, 4 method
     public void readDirectory(File directory) {
-       // baca isi directory
+        // baca isi directory
         File files[] = directory.listFiles();
-        Document doc = new Document();
         for (int i = 0; i < files.length; i++) {
             // buat document baru
+            Document doc = new Document();
             doc.setId(i); // set idDoc sama dengan i
             // baca isi file
             // Isi file disimpan di atribut content dari objeck document
@@ -621,6 +621,7 @@ public class InvertedIndex2 {
         }
         // lakukan indexing atau buat dictionary
         this.makeDictionaryWithTermNumber();
+
     }
 
     public void listAllFiles(File folder) {
@@ -733,13 +734,11 @@ public class InvertedIndex2 {
             // per epoch
             Document doc = listOfDocument.get(i);
             // hitung similarity
-            ArrayList<DocumentClusterSimilarity> listOfSimilarity
-                    = new ArrayList<DocumentClusterSimilarity>();
+            ArrayList<DocumentClusterSimilarity> listOfSimilarity = new ArrayList<DocumentClusterSimilarity>();
             for (int j = 0; j < listOfCluster.size(); j++) {
                 double sim = getCosineSimilarity(listOfDocument.get(i).getListOfClusteringPosting(),
                         listOfCluster.get(j).getCenter().getListOfClusteringPosting());
-                DocumentClusterSimilarity simDoc
-                        = new DocumentClusterSimilarity(sim, listOfCluster.get(j));
+                DocumentClusterSimilarity simDoc = new DocumentClusterSimilarity(sim, listOfCluster.get(j));
                 listOfSimilarity.add(simDoc);
             }
             // sorting similarity
