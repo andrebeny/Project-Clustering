@@ -17,6 +17,7 @@ public class Cluster {
     private ArrayList<Document> member = new ArrayList<Document>();
     private Document center = new Document();
     private int idCluster;
+    private InvertedIndex2 ii = new InvertedIndex2();
 
     public Cluster() {
     }
@@ -36,6 +37,7 @@ public class Cluster {
      * @param member the member to set
      */
     public void setMember(ArrayList<Document> member) {
+        ii.setListOfDocument(member);
         this.member = member;
     }
 
@@ -52,6 +54,15 @@ public class Cluster {
     public void setCenter(Document center) {
         this.center = center;
     }
+    
+//    public void reCenter() {
+//        double hasil = 0;
+//        for (int i = 0; i < member.size(); i++) {
+//            double jarak = ii.getCosineSimilarity(center.getListOfClusteringPosting(), member.get(i).getListOfClusteringPosting());
+//            hasil = hasil + jarak;
+//        }
+//        
+//    }
 
     /**
      * @return the idCluster
