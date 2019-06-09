@@ -758,6 +758,7 @@ public class InvertedIndex2 {
     //mbuh aku ra ngerti iki pie ngitung centroide
     //soale kui aku ra ngerti disimpene piye karo ng dhi
     //yowes nggo KNN wae lah yo rapopo 
+    
     public void ClusteringAnyar(){
         ArrayList<Document> c1 = new ArrayList<>();
         ArrayList<Document> c2 = new ArrayList<>();
