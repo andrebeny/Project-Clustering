@@ -39,51 +39,7 @@ public class Document implements Comparable<Document> {
     private ArrayList<Double> unitVector = new ArrayList<>();
     private ArrayList<Posting> listOfClusteringPosting = new ArrayList<Posting>();
 
-    public ArrayList<Double> getUnitVector() {
-        //Iki isih salah, mbok bantu benahke koyo sek tak chat ng WA
-        return unitVector;
-//        return null;
-        //nggoleki vector space ne, sek nilai term iki piro opo mneh kui
-        //iki sek penting tapi aku yo ramudeng jugo iki ngopo
-    }
-
-    public void add_component_to_vector(double Tf_Idf) {
-        this.tf_idf = Tf_Idf;
-    }
-
-    //iki posting pak
-    //nganggo method getlengthofposting, hampir mirip
-    public void normalized_Vector() {
-        double squaredSum = 0;
-        if (!docVector.isEmpty()) {
-
-            for (int d = 0; d < docVector.size(); d++) {
-                squaredSum += (docVector.get(d) * docVector.get(d));
-            }
-
-            squaredSum = Math.sqrt(squaredSum);
-
-            for (int d = 0; d < docVector.size(); d++) {
-                unitVector.add(d, docVector.get(d) / squaredSum);
-            }
-        }
-
-    }
-    
-
-    public ArrayList<Double> getVector() {
-        return docVector;
-    }
-
-    public double countOccurences(String get) {
-        int count = 0;
-        for (int x = 0; x < listOfClusteringPosting.size(); x++) {
-            if (get.equals(listOfClusteringPosting.get(x))) {
-                count++;
-            }
-        }
-        return count;
-    }
+   
 
     public String getName() {
         return namaDokumen;

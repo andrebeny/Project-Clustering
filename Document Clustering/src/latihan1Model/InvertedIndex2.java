@@ -719,45 +719,6 @@ public class InvertedIndex2 {
         }
     }
 
-    //seko bapake iki mbok jajali ngko aku r mudeng
-    //bukane iki tinggal gawe main e wae to
-    //wingi jare bapake iki hrung dadi, makane sek wes dadi kui maju karo bapake
-    public void clustering() {
-        // buat arraylistofCluster sejumlah kelompok yang sudah ditentukan
-        // dan tetapkan N document awal sebagai pusat listOfCluster
-        for (int i = 0; i < NUMBER_OF_DOCUMENT_CLUSTER; i++) {
-            Cluster cluster = new Cluster(i);
-            cluster.setCenter(listOfDocument.get(i));
-        }
-
-        // lalu lakukan penghitungan similarity antara dokumen 
-        // dengan masing-masing center
-        for (int i = 0; i < listOfDocument.size(); i++) {
-            // per epoch
-            Document doc = listOfDocument.get(i);
-            // hitung similarity
-            ArrayList<DocumentClusterSimilarity> listOfSimilarity = new ArrayList<DocumentClusterSimilarity>();
-            for (int j = 0; j < listOfCluster.size(); j++) {
-                double sim = getCosineSimilarity(listOfDocument.get(i).getListOfClusteringPosting(),
-                        listOfCluster.get(j).getCenter().getListOfClusteringPosting());
-                DocumentClusterSimilarity simDoc = new DocumentClusterSimilarity(sim, listOfCluster.get(j));
-                listOfSimilarity.add(simDoc);
-            }
-            // sorting similarity
-            Collections.sort(listOfSimilarity);
-            // asumsi sorting descending , similarity terurut dari besar ke kecil
-            // tetapkan document ke listOfCluster dengan similarity terbesar
-            // anda juga bisa tetapkan dengan KNN
-            listOfSimilarity.get(0).getCluster().getMember().add(doc);
-        }
-    }
-    // sek iki error index mergo arraylist e wes diwoco isine sedangkan isine hrung ono
-    // baca : belum di add ke array list namun sudah dibaca isi ArrayListnya
-
-    //Tak jajali garap clustering anyar wae iki
-    //mbuh aku ra ngerti iki pie ngitung centroide
-    //soale kui aku ra ngerti disimpene piye karo ng dhi
-    //yowes nggo KNN wae lah yo rapopo 
     public void ClusteringAnyar() {
         ArrayList<Document> c1 = new ArrayList<>();
         ArrayList<Document> c2 = new ArrayList<>();
@@ -773,12 +734,11 @@ public class InvertedIndex2 {
             listOfCluster.get(i).setCenter(listOfDocument.get(ran));
         }
 
-//        for (int i = NUMBER_OF_DOCUMENT_CLUSTER; i < listOfDocument.size(); i++) {
         for (int i = 0; i < listOfDocument.size(); i++) {
             ArrayList<DocumentClusterSimilarity> listOfSimilarity = new ArrayList<DocumentClusterSimilarity>();
             for (int j = 0; j < listOfCluster.size(); j++) {
                 double similarity = getCosineSimilarity(listOfDocument.get(i).getListOfClusteringPosting(),
-                         listOfCluster.get(j).getCenter().getListOfClusteringPosting());
+                        listOfCluster.get(j).getCenter().getListOfClusteringPosting());
                 DocumentClusterSimilarity ds = new DocumentClusterSimilarity(similarity, listOfCluster.get(j));
                 listOfSimilarity.add(ds);
             }

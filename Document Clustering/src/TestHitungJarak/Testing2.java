@@ -27,15 +27,7 @@ public class Testing2 {
 
         index.preClustering();
         index.ClusteringAnyar();
-        //perlu nganggo loop
-        //error index out of bounds
-        
-        //loop nggo ngopo??
-        
-        for (int i = 0; i < index.getListOfDocument().size(); i++) {
-            //iki meh ngopo?
-            
-        }
+       
 
         ArrayList<Cluster> klaster = index.getCluster();
         for (int i = 0; i < klaster.size(); i++) {
