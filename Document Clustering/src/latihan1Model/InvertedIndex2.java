@@ -720,6 +720,8 @@ public class InvertedIndex2 {
     }
 
     public void NewClustering() {
+        //NUMBER OF DOCUMENT CLUSTER = 2
+        
         ArrayList<Document> c1 = new ArrayList<>();
         ArrayList<Document> c2 = new ArrayList<>();
 //        ArrayList<Document> c3 = new ArrayList<>();
