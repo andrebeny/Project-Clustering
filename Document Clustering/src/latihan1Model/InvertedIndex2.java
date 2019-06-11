@@ -32,7 +32,7 @@ public class InvertedIndex2 {
     private ArrayList<Document> listOfDocument = new ArrayList<Document>();
     private ArrayList<Term> dictionary = new ArrayList<Term>();
     private ArrayList<Cluster> listOfCluster = new ArrayList<Cluster>();
-    public static final int NUMBER_OF_DOCUMENT_CLUSTER = 2;
+    public static final int NUMBER_OF_DOCUMENT_CLUSTER = 3;
 
     public InvertedIndex2() {
     }
@@ -773,7 +773,8 @@ public class InvertedIndex2 {
             listOfCluster.get(i).setCenter(listOfDocument.get(ran));
         }
 
-        for (int i = NUMBER_OF_DOCUMENT_CLUSTER; i < listOfDocument.size(); i++) {
+//        for (int i = NUMBER_OF_DOCUMENT_CLUSTER; i < listOfDocument.size(); i++) {
+        for (int i = 0; i < listOfDocument.size(); i++) {
             ArrayList<DocumentClusterSimilarity> listOfSimilarity = new ArrayList<DocumentClusterSimilarity>();
             for (int j = 0; j < listOfCluster.size(); j++) {
                 double similarity = getCosineSimilarity(listOfDocument.get(i).getListOfClusteringPosting(),
