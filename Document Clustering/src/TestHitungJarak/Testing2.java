@@ -26,7 +26,7 @@ public class Testing2 {
         index.readDirectory(dir);
 
         index.preClustering();
-        index.ClusteringAnyar();
+        index.NewClustering();
        
 
         ArrayList<Cluster> klaster = index.getCluster();

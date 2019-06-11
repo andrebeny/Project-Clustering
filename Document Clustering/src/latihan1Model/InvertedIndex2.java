@@ -719,7 +719,7 @@ public class InvertedIndex2 {
         }
     }
 
-    public void ClusteringAnyar() {
+    public void NewClustering() {
         ArrayList<Document> c1 = new ArrayList<>();
         ArrayList<Document> c2 = new ArrayList<>();
 //        ArrayList<Document> c3 = new ArrayList<>();
