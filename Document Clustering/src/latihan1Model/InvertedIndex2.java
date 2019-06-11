@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Random;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
@@ -31,7 +32,7 @@ public class InvertedIndex2 {
     private ArrayList<Document> listOfDocument = new ArrayList<Document>();
     private ArrayList<Term> dictionary = new ArrayList<Term>();
     private ArrayList<Cluster> listOfCluster = new ArrayList<Cluster>();
-    public static final int NUMBER_OF_DOCUMENT_CLUSTER = 3;
+    public static final int NUMBER_OF_DOCUMENT_CLUSTER = 2;
 
     public InvertedIndex2() {
     }
@@ -752,44 +753,46 @@ public class InvertedIndex2 {
     }
     // sek iki error index mergo arraylist e wes diwoco isine sedangkan isine hrung ono
     // baca : belum di add ke array list namun sudah dibaca isi ArrayListnya
-    
-    
+
     //Tak jajali garap clustering anyar wae iki
     //mbuh aku ra ngerti iki pie ngitung centroide
     //soale kui aku ra ngerti disimpene piye karo ng dhi
     //yowes nggo KNN wae lah yo rapopo 
-    
-    public void ClusteringAnyar(){
+    public void ClusteringAnyar() {
         ArrayList<Document> c1 = new ArrayList<>();
         ArrayList<Document> c2 = new ArrayList<>();
-        ArrayList<Document> c3 = new ArrayList<>();
+//        ArrayList<Document> c3 = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_DOCUMENT_CLUSTER; i++) {
             Cluster clu = new Cluster(i);
             listOfCluster.add(clu);
 //            Cluster cluster = new Cluster(i);
 //            cluster.setCenter(listOfDocument.get(i));
-            listOfCluster.get(i).setCenter(listOfDocument.get(i));
+//            listOfCluster.get(i).setCenter(listOfDocument.get(i));
+            Random a = new Random();
+            int ran = a.nextInt(51) + 1;
+            listOfCluster.get(i).setCenter(listOfDocument.get(ran));
         }
-        
+
         for (int i = NUMBER_OF_DOCUMENT_CLUSTER; i < listOfDocument.size(); i++) {
             ArrayList<DocumentClusterSimilarity> listOfSimilarity = new ArrayList<DocumentClusterSimilarity>();
             for (int j = 0; j < listOfCluster.size(); j++) {
-                double similarity = getCosineSimilarity(listOfDocument.get(i).getListOfClusteringPosting() 
-                        ,listOfCluster.get(j).getCenter().getListOfClusteringPosting());
+                double similarity = getCosineSimilarity(listOfDocument.get(i).getListOfClusteringPosting(),
+                         listOfCluster.get(j).getCenter().getListOfClusteringPosting());
                 DocumentClusterSimilarity ds = new DocumentClusterSimilarity(similarity, listOfCluster.get(j));
                 listOfSimilarity.add(ds);
             }
             Collections.sort(listOfSimilarity);
-            if (listOfSimilarity.get(0).getCluster().getIdCluster()==0) {
+            if (listOfSimilarity.get(0).getCluster().getIdCluster() == 0) {
                 c1.add(listOfDocument.get(i));
-            }else if (listOfSimilarity.get(0).getCluster().getIdCluster()==1) {
+            } else if (listOfSimilarity.get(0).getCluster().getIdCluster() == 1) {
                 c2.add(listOfDocument.get(i));
-            }else{
-                c3.add(listOfDocument.get(i));
             }
+//            else{
+//                c3.add(listOfDocument.get(i));
+//            }
         }
         listOfCluster.get(0).setMember(c1);
         listOfCluster.get(1).setMember(c2);
-        listOfCluster.get(2).setMember(c3);
+//        listOfCluster.get(2).setMember(c3);
     }
 }

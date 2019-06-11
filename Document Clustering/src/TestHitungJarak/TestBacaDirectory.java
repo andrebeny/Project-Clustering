@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import latihan1Model.Kmeans;
+
 
 /**
  *
@@ -62,9 +62,6 @@ public class TestBacaDirectory {
         }
         //njajal method cluster
         
-        Kmeans cluster = new Kmeans(index.getListOfDocument());
-        cluster.createCluster(2);
-        //error mergo ono sek NaN kui
     }
 }
 
